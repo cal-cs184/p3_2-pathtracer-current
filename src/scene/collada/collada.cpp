@@ -885,7 +885,7 @@ void ColladaParser::parse_material ( XMLElement* xml, MaterialInfo& material ) {
         if (type == "emission") {
           XMLElement *e_radiance  = get_element(e_bsdf, "radiance");
           Vector3D radiance = spectrum_from_string(string(e_radiance->GetText()));
-          BSDF* bsdf = new EmissionBSDF(radiance);
+          BSDF* bsdf = new EmissionBSDF(radiance, Vector3D(0.0)); // FIXME: Should not add emissive materials. Use light sources directly.
           material.bsdf = bsdf;
         } else if (type == "mirror") {
           XMLElement *e_reflectance  = get_element(e_bsdf, "reflectance");
